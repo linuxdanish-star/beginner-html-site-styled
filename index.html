@@ -1,25 +1,106 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>My test page</title>
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
-    <link href="styles/style.css" rel="stylesheet" type="text/css">
-  </head>
-  <body>
-    <h1>Mozilla is cool - deployed with jenkins</h1>
-    <img src="images/firefox-icon.png" alt="The Firefox logo: a flaming fox surrounding the Earth.">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>From Commit to Kubernetes | DevOps Lab</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #0b1220;
+      color: #f1f5f9;
+      font: 1rem/1.6 system-ui, sans-serif;
+    }
+    main { max-width: 64rem; margin: auto; padding: 2rem 1.25rem; }
+    header {
+      padding: clamp(1.5rem, 6vw, 4rem);
+      border: 1px solid #334155;
+      border-radius: 1.5rem;
+      background: linear-gradient(130deg, #172554, #0f172a 70%);
+    }
+    .eyebrow {
+      color: #7dd3fc;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 12ch;
+      margin: .4rem 0 1rem;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      line-height: 1.02;
+      letter-spacing: -.05em;
+    }
+    p { color: #cbd5e1; }
+    header p { max-width: 52ch; }
+    a {
+      display: inline-block;
+      margin-top: .5rem;
+      padding: .65rem 1rem;
+      border-radius: .65rem;
+      background: #7dd3fc;
+      color: #082f49;
+      font-weight: 700;
+    }
+    a:focus-visible { outline: 3px solid white; outline-offset: 4px; }
+    section { margin-top: 2rem; }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+      gap: 1rem;
+      padding: 0;
+    }
+    .steps li {
+      list-style: none;
+      padding: 1.15rem;
+      border: 1px solid #334155;
+      border-radius: 1rem;
+      background: #111c2e;
+    }
+    h3 { margin: .3rem 0; }
+    li p { margin-bottom: 0; }
+    footer { margin-top: 2rem; color: #cbd5e1; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <span class="eyebrow">DevOps Lab · Website Delivery</span>
+      <h1>From commit to Kubernetes.</h1>
+      <p>Push a change to GitHub. Jenkins detects it, builds and publishes
+        a Docker image, and rolls the new version out to Kubernetes.</p>
+      <a href="#pipeline">See how it ships ↓</a>
+    </header>
 
-    <p>At Mozilla, we’re a global community of</p>
+    <section id="pipeline" aria-labelledby="pipeline-title">
+      <h2 id="pipeline-title">How it ships</h2>
+      <ol class="steps" role="list">
+        <li>
+          <span class="eyebrow">01 · Source</span>
+          <h3>GitHub</h3>
+          <p>A commit to <code>main</code> starts the delivery process.</p>
+        </li>
+        <li>
+          <span class="eyebrow">02 · Build</span>
+          <h3>Jenkins</h3>
+          <p>SCM polling detects the commit and triggers a build.</p>
+        </li>
+        <li>
+          <span class="eyebrow">03 · Publish</span>
+          <h3>Docker Hub</h3>
+          <p>The pipeline pushes an image tagged with the commit and build number.</p>
+        </li>
+        <li>
+          <span class="eyebrow">04 · Deploy</span>
+          <h3>Kubernetes</h3>
+          <p>The Deployment targets five replicas. The Service exposes the site on NodePort <code>30010</code>.</p>
+        </li>
+      </ol>
+    </section>
 
-    <ul> <!-- changed to list in the tutorial -->
-      <li>technologists</li>
-      <li>thinkers</li>
-      <li>builders</li>
-    </ul>
-
-    <p>working together to keep the Internet alive and accessible, so people worldwide can be informed contributors and creators of the Web. We believe this act of human collaboration across an open platform is essential to individual growth and our collective future.</p>
-
-    <p>Read the <a href="https://www.mozilla.org/en-US/about/manifesto/">Mozilla Manifesto</a> to learn even more about the values and principles that guide the pursuit of our mission.</p>
-  </body>
+    <footer>Infrastructure provisioned with Terraform and configured with Ansible.</footer>
+  </main>
+</body>
 </html>
